@@ -8,14 +8,14 @@ $query = "SELECT YEAR(dateB), MONTH(dateB),SUM(conso),FORMAT(AVG(Tmoy),1) FROM c
         GROUP BY YEAR(dateB), MONTH(dateB)
         ORDER BY dateB " ;
           
-connectMaBase($hostname, $database, $username, $password);
-$req = mysql_query($query) ;
-mysql_close();
+$conn =connectMaBase($hostname, $database, $username, $password);
+$req = mysqli_query($conn,$query) ;
+mysqli_close($conn);
 
 // decalage des mois pour debut saison en septembre    
 $saison = ['9' => 0, '10' => 1, '11' => 2, '12' => 3, '1' => 4, '2' => 5, '3' => 6, '4' => 7, '5' => 8, '6' => 9, '7' => 10, '8' => 11];
 
-while($data = mysql_fetch_row($req)){
+while($data = mysqli_fetch_row($req)){
     $annee = $data[0];
     $mois = $data[1];
 	

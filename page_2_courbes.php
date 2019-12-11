@@ -19,11 +19,11 @@
 	$query1 = "SELECT YEAR(dateB),MONTH(dateB),DAY(dateB) FROM consommation  
              LIMIT 1";
 			 
-	connectMaBase($hostname, $database, $username, $password);
-    $req1 = mysql_query($query1) ;
-	mysql_close();
+$conn =	connectMaBase($hostname, $database, $username, $password);
+    $req1 = mysqli_query($conn,$query1) ;
+	mysqli_close($conn);
 
-    $data = mysql_fetch_row($req1);
+    $data = mysqli_fetch_row($req1);
     $dateMin = [$data[0],$data[1],$data[2]];
 	
 	if (empty($data[0])){

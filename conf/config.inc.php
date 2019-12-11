@@ -1,18 +1,18 @@
 <?php
 //****vos parametres **************************************************** 	
-$IPchaudiere = "192.168.0.198"; // indiquez l'IP de votre chaudiere
-$firmware= "14g" ; // valeur possible voir dans stockBDD.php , si votre firmware est plus recent utilisez le dernier dispo
+$IPchaudiere = "192.168.1.108"; // indiquez l'IP de votre chaudiere
+$firmware= "14j" ; // valeur possible voir dans stockBDD.php , si votre firmware est plus recent utilisez le dernier dispo
 
 $port = 23; //port telnet, ne pas modifier
 $mode_conn = 'telnet'; // mode de connexion : telnet pour chaudiere recente ou serial pour les anciennes 
 						// en mode serial la page d'acceuil ne fonctionne plus en temps reel mais utilise la BDD
-$taille_silo = 4000; // en kg , il s'agit de la capacité max du silo
+$taille_silo = 3000; // en kg , il s'agit de la capacité max du silo
 
 $refresh = 10; //rafraichissement en sec de l'etat de la chaudiere , ne pas descendre sous les 2 car le telnet de la chaudiere n'arrive plus a repondre assez vite
 $histo_temps = 30; //historique du graphique de la page d'accueil en mn
 
 // MySQL config
-$hostname = "127.0.0.1:3307"; //127.0.0.1 si la BDD est sur la meme machine que le serveur web , sinon IP . 3306 MySQL 5 , 3307 MySQL 10
+$hostname = "127.0.0.1:3306"; //127.0.0.1 si la BDD est sur la meme machine que le serveur web , sinon IP . 3306 MySQL 5 , 3307 MySQL 10
 $database = "hargassner"; // nom de la BDD
 $username = "hargassner"; // utilisateur mysql
 $password = "password";
@@ -54,7 +54,7 @@ $thousandsSep = "''"; // thousands separator
 
 // ************* connection to MySQL, **********************************************
 function connectMaBase($hostname, $database, $username, $password){
-    $Conn = mysql_connect ($hostname, $username, $password) or trigger_error(mysql_error(),E_USER_ERROR);  
-    mysql_select_db($database, $Conn);
+    $Conn = mysqli_connect ($hostname, $username, $password,$database);  
+    return $Conn;
 }
 ?>

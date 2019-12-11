@@ -4,7 +4,7 @@
     <?php
     // **********recherche nouvelle version******************************
     require_once("conf/version.php");
-    $config_github = fopen('https://raw.githubusercontent.com/Jahislove/Hargassner/master/conf/version.php', 'r'); 
+    /*$config_github = fopen('https://raw.githubusercontent.com/Jahislove/Hargassner/master/conf/version.php', 'r'); 
     if ($config_github) {
         while (!feof($config_github)) {
             $ligne = fgets($config_github); //lit chaque ligne du fichier
@@ -26,7 +26,7 @@
         echo '<div id="new_version">';
         echo 'Nouvelle version disponible : '.$version_github.' - <a href="https://github.com/Jahislove/Hargassner/blob/master/notes_version.txt">Notes de version</a> - <a href="auto-install.php">Installation</a>';
         echo '</div>';
-    }
+    }*/
 	//ajout nouveau parametre dans config.php
 	// si un fichier de nouveau parametre existe
 	if (is_file('conf/new_param.txt')) {

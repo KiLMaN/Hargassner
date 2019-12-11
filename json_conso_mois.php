@@ -12,11 +12,11 @@ require_once("conf/config.inc.php");
             WHERE dateB BETWEEN '".$annee."-".$mois."-01' AND '".$annee."-".$mois."-31'
             ORDER BY dateB DESC LIMIT 31";
               
-	connectMaBase($hostname, $database, $username, $password);
-    $req = mysql_query($query) ;
-	mysql_close();
+$conn =	connectMaBase($hostname, $database, $username, $password);
+    $req = mysqli_query($conn,$query) ;
+	mysqli_close($conn);
     
-    while($data = mysql_fetch_row($req)){
+    while($data = mysqli_fetch_row($req)){
         $dateD = strtotime($data[0]) * 1000;
         $liste1[] = [$dateD, $data[1]];
         $liste2[] = [$dateD, $data[2]];

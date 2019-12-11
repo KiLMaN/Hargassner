@@ -11,11 +11,11 @@ if ($mode_conn == 'serial'){
 			ORDER by id DESC
 			LIMIT 1" ;
 			  
-	connectMaBase($hostname, $database, $username, $password);
-	$req = mysql_query($query) ;
-	mysql_close();
+	$conn = connectMaBase($hostname, $database, $username, $password);
+	$req = mysqli_query($conn,$query) ;
+	mysqli_close($conn);
 	
-    $data = mysql_fetch_row($req);
+    $data = mysqli_fetch_row($req);
     $data[1] = strtotime($data[1]) * 1000;
 	array_shift ($data); // supprime le champ id
 	

@@ -32,7 +32,7 @@ if ( rtrim($data[0]) != 'utc,local,celsius') { // verification format du csv
 }
 
 // traitement 
-connectMaBase($hostname, $database, $username, $password);
+$conn = connectMaBase($hostname, $database, $username, $password);
 
 for ($i = 1; $i < count($data); $i++){ // pour chaque ligne du tableau
 	list($UTC, $GMT, $temp) = explode(",",$data[$i]);//separe les champs
@@ -43,8 +43,8 @@ for ($i = 1; $i < count($data); $i++){ // pour chaque ligne du tableau
 
 	//recherche l'id correspondant  a la date
 	$reqid = "select id from data WHERE dateB LIKE '$GMT:__'";
-	$result = mysql_query($reqid);
-    $id = mysql_fetch_row($result);
+	$result = mysqli_query($conn,$reqid);
+	$id = mysqli_fetch_row($result);
 	
 	$id_fin = $id[0] + $frequence ;
 	// utilise l'id pour updater
@@ -53,11 +53,11 @@ for ($i = 1; $i < count($data); $i++){ // pour chaque ligne du tableau
 				
 	echo "<br>" . $requete;
 	//injection dans la BDD
-	if (mysql_query($requete)) {
+	if (mysqli_query($conn,$requete)) {
 		echo " => record updated successfully";
 	} else {
 		echo " => Erreur " ;
 	}
 }
-mysql_close();
+mysqli_close($conn);
 ?>

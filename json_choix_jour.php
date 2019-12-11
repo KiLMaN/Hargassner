@@ -12,11 +12,11 @@ require_once("conf/config.inc.php");
 $query = "SELECT dateB,c23,c21,c3,c6,c138,c134,c56 FROM data
           WHERE dateB BETWEEN '".$jour."' AND '".$jour."' + INTERVAL 1 DAY";
 
-    connectMaBase($hostname, $database, $username, $password);
-    $req = mysql_query($query) ;
-	mysql_close();
+    $conn = connectMaBase($hostname, $database, $username, $password);
+    $req = mysqli_query($conn,$query) ;
+	mysqli_close($conn);
     
-    while($data = mysql_fetch_row($req)){
+    while($data = mysqli_fetch_row($req)){
         $dateD = strtotime($data[0]) * 1000;
         $liste1[] = [$dateD, $data[1]];
         $liste2[] = [$dateD, $data[2]];

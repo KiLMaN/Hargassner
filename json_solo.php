@@ -11,11 +11,11 @@ require_once("conf/config.inc.php");
     $query = "SELECT dateB,$channel FROM data
               ORDER by dateB DESC LIMIT 2880";
               
-	connectMaBase($hostname, $database, $username, $password);
-    $req = mysql_query($query) ;
-	mysql_close();
+$conn = 	connectMaBase($hostname, $database, $username, $password);
+    $req = mysqli_query($conn,$query) ;
+	mysqli_close($conn);
     
-    while($data = mysql_fetch_row($req)){
+    while($data = mysqli_fetch_row($req)){
         $dateD = strtotime($data[0]) * 1000;
         $liste[] = [$dateD, $data[1]];
     }

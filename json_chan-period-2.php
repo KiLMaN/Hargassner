@@ -18,9 +18,9 @@ require_once("conf/config.inc.php");
             WHERE dateB BETWEEN '".$annee."-".$mois."-".$jour." 00:00:00' AND '".$annee."-".$mois."-".$jour." 23:59:59'
             ORDER BY dateB DESC LIMIT ".$periode;
               
-	connectMaBase($hostname, $database, $username, $password);
-    $req = mysql_query($query) ;
-	mysql_close();
+$conn=	connectMaBase($hostname, $database, $username, $password);
+    $req = mysqli_query($conn,$query) ;
+	mysqli_close($conn);
     
     // $dict = ['','arret','Allumage','Demarrage','Controle allumage','Allumeur','Demarrage combustion','Combustion','Veille','Arret pour decendrage','decendrage','Refroidissement','Nettoyage'];
     // $dict2= ['','0','0','0','0','0','0','0','0','100','100','0','100'];
@@ -34,7 +34,7 @@ require_once("conf/config.inc.php");
 	
 	$prev = 1;
     $listePmoyFonc[]= '';
-	while($data = mysql_fetch_row($req)){
+	while($data = mysqli_fetch_row($req)){
         $dateD = strtotime($data[0]) * 1000;
         $liste0['data'][] = [x => $dateD, y => $data[1],valeur => $dict[$data[1]] ];
         $liste1['data'][] = [x => $dateD, y => $dict2[$data[2]],valeur => $dict3[$data[2]] ];

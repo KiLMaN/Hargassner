@@ -102,7 +102,8 @@ $.ajax({
         // elements qui ne dependent pas d'un etat , mais de la valeur d'un channel
         // l'extracteur de fumée 
         if ( channel[53] > 0 ) {
-            document.getElementById('nano-A1').className = 'extr_anime'; 
+		document.getElementById('nano-A1').className = 'extr_anime';
+		document.getElementById('nano-A1').style.animationDuration = (10 / channel[53]) + "s";
         }
         else {
             document.getElementById('nano-A1').className = 'extr_fixe'; 
@@ -180,14 +181,14 @@ $.ajax({
         document.getElementById('radiateur-texte').innerHTML =  channel[21] + '°C';
         document.getElementById('ballonECS-texte').innerHTML =  channel[27] + '°C';
         document.getElementById('bois-texte').innerHTML =  channel[56] + '%';
-        
+        document.getElementById('nano-D2').style.animationDuration = (100 / channel[56]) + "s"; 
 		// rafraichissement des pompes
 		if ( channel[23] > 0 ) {
 			document.getElementById('pompe-radiat').className = 'pompeON';
         } else {
 			document.getElementById('pompe-radiat').className = 'pompeOFF';
 		}	
-		if ( channel[183] == 2 ) {
+		if ( channel[92] == 1 ) {
 			document.getElementById('pompe-ECS').className = 'pompeON';
         } else {
 			document.getElementById('pompe-ECS').className = 'pompeOFF';
